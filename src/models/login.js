@@ -68,6 +68,9 @@ export default {
         );
       }
     },
+    *changeLoginStatus({ payload }, { put }) {
+      yield put({payload});
+    }
   },
 
   reducers: {

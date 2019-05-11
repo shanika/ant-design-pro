@@ -1,4 +1,9 @@
 export default [
+  {
+    path: 'oauth2/redirect',
+    component: '../pages/OAuth2RedirectHandler.js',
+    hideInMenu : true,
+  },
   // user
   {
     path: '/user',

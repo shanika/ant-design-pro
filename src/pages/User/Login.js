@@ -159,7 +159,9 @@ class LoginPage extends Component {
           </Submit>
           <div className={styles.other}>
             <FormattedMessage id="app.login.sign-in-with" />
-            <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
+            <a href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:8000/oauth2/redirect">
+              <Icon type="alipay-circle" className={styles.icon} theme="outlined" />
+            </a>
             <Icon type="taobao-circle" className={styles.icon} theme="outlined" />
             <Icon type="weibo-circle" className={styles.icon} theme="outlined" />
             <Link className={styles.register} to="/user/register">
