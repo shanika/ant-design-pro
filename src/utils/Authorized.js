@@ -8,5 +8,13 @@ const reloadAuthorized = () => {
   Authorized = RenderAuthorize(getAuthority());
 };
 
-export { reloadAuthorized };
+const setAccessToken = (accessToken) => {
+  localStorage.setItem('kandula-token', accessToken);
+};
+
+const deleteAccessToken = () => {
+  localStorage.removeItem('kandula-token');
+};
+
+export { reloadAuthorized, setAccessToken, deleteAccessToken };
 export default Authorized;
