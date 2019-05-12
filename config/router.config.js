@@ -29,7 +29,7 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/dashboard/analysis', authority: ['ROLE_ADMIN', 'user'] },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -93,7 +93,7 @@ export default [
           {
             path: '/form/advanced-form',
             name: 'advancedform',
-            authority: ['admin'],
+            authority: ['ROLE_ADMIN'],
             component: './Forms/AdvancedForm',
           },
         ],
@@ -167,7 +167,7 @@ export default [
           {
             path: '/profile/advanced',
             name: 'advanced',
-            authority: ['admin'],
+            authority: ['ROLE_ADMIN'],
             component: './Profile/AdvancedProfile',
           },
         ],
