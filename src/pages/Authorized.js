@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Redirect from 'umi/redirect';
 import pathToRegexp from 'path-to-regexp';
 import { connect } from 'dva';
 import Authorized from '@/utils/Authorized';
-import { getAuthority } from '@/utils/authority';
 import Exception403 from '@/pages/Exception/403';
 
-function AuthComponent({ children, location, routerData }) {
-  const auth = getAuthority();
-  const isLogin = auth && auth[0] !== 'guest';
-  const getRouteAuthority = (path, routeData) => {
+@connect(({ menu: menuModel, login : { authority } }) => ({
+  routerData: menuModel.routerData,
+  authority
+}))
+class AuthComponent extends Component {
+
+  componentWillMount() {
+    const { authority, dispatch} = this.props;
+    if (authority === undefined) {
+      dispatch({
+        type : 'login/fetchAuthority'
+      });
+    }
+  }
+
+  getRouteAuthority = (path, routeData) => {
     let authorities;
     routeData.forEach(route => {
       // match prefix
@@ -18,21 +29,31 @@ function AuthComponent({ children, location, routerData }) {
 
         // get children authority recursively
         if (route.routes) {
-          authorities = getRouteAuthority(path, route.routes) || authorities;
+          authorities = this.getRouteAuthority(path, route.routes) || authorities;
         }
       }
     });
     return authorities;
   };
-  return (
-    <Authorized
-      authority={getRouteAuthority(location.pathname, routerData)}
-      noMatch={isLogin ? <Exception403 /> : <Redirect to="/user/login" />}
-    >
-      {children}
-    </Authorized>
-  );
+
+  render() {
+
+    const { children, location, routerData, authority } = this.props;
+
+    if (authority) {
+      const isLogin = authority[0] !== 'guest';
+      return (
+        <Authorized
+          authority={this.getRouteAuthority(location.pathname, routerData)}
+          noMatch={isLogin ? <Exception403 /> : <Redirect to="/user/login" />}
+        >
+          {children}
+        </Authorized>
+      );
+    }
+
+    return <div />
+  }
 }
-export default connect(({ menu: menuModel }) => ({
-  routerData: menuModel.routerData,
-}))(AuthComponent);
+
+export default (AuthComponent);

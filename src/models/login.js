@@ -1,15 +1,16 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
-import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized, setAccessToken, deleteAccessToken } from '@/utils/Authorized';
+import * as api from '../services/api';
 
 export default {
   namespace: 'login',
 
   state: {
     status: undefined,
+    authority : undefined
   },
 
   effects: {
@@ -21,7 +22,13 @@ export default {
       });
       // Login successfully
       if (response.status === 'ok') {
+
         setAccessToken(response.accessToken);
+        yield put({
+          type : 'setAuthority',
+          payload : response.currentAuthority
+        });
+
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
@@ -41,6 +48,14 @@ export default {
       }
     },
 
+    *fetchAuthority( action, { call, put}) {
+      const authority = yield call(api.getAuthority);
+      yield put({
+        type : 'setAuthority',
+        payload : authority
+      })
+    },
+
     *getCaptcha({ payload }, { call }) {
       yield call(getFakeCaptcha, payload);
     },
@@ -53,6 +68,11 @@ export default {
           currentAuthority: 'guest',
         },
       });
+
+      yield put({
+        type: 'setAuthority',
+      });
+
       deleteAccessToken();
       reloadAuthorized();
       const { redirect } = getPageQuery();
@@ -75,12 +95,17 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
       return {
         ...state,
         status: payload.status,
         type: payload.type,
       };
     },
+    setAuthority(state, { payload }) {
+      return {
+        ...state,
+        authority : payload
+      }
+    }
   },
 };

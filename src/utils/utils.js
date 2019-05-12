@@ -132,7 +132,11 @@ export function getRoutes(path, routerData) {
 }
 
 export function getPageQuery() {
-  return parse(window.location.href.split('?')[1]);
+  let { href } = window.location;
+  if (href && href.charAt(href.length - 1) === '#') {
+    href = href.substring(0, href.length - 1);
+  }
+  return parse(href.split('?')[1]);
 }
 
 export function getQueryPath(path = '', query = {}) {

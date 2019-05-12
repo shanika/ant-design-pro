@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import Redirect from 'umi/redirect';
 import { connect } from 'dva';
-import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { setAccessToken } from '@/utils/Authorized';
 
-@connect(()=>{})
+@connect(() => ({}))
 class OAuth2RedirectHandler extends PureComponent {
 
   render() {
@@ -15,7 +14,6 @@ class OAuth2RedirectHandler extends PureComponent {
 
     if(token) {
       setAccessToken(token);
-      setAuthority('user');
       return <Redirect
         to="/dashboard/analysis"
       />;
@@ -33,10 +31,7 @@ class OAuth2RedirectHandler extends PureComponent {
       });
 
       return <Redirect
-
-        to={{
-        to: "/user/login",
-      }}
+        to="/user/login"
       />;
 
   }

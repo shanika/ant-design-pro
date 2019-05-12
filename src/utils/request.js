@@ -61,7 +61,7 @@ const errorHandler = error => {
   }
 };
 
-const getAuthHeader = () => {
+export const getAuthHeader = () => {
   const authorization = localStorage.getItem('kandula-token');
   return authorization ? { authorization : `Bearer ${authorization}` } : {};
 };
@@ -71,7 +71,6 @@ const getAuthHeader = () => {
  */
 const request = extend({
   errorHandler, // Default error handling
-  headers : getAuthHeader()
 });
 
 export default request;

@@ -1,8 +1,18 @@
+import { Component } from 'react';
+import { connect } from 'dva';
 import CheckPermissions from './CheckPermissions';
 
-const Authorized = ({ children, authority, noMatch = null }) => {
-  const childrenRender = typeof children === 'undefined' ? null : children;
-  return CheckPermissions(authority, childrenRender, noMatch);
-};
+@connect(({ login : { authority } }) => ({
+  currentAuthority : authority
+}))
+class Authorized extends Component {
+  render() {
+    const { children, authority, noMatch, currentAuthority } = this.props;
+    const childrenRender = typeof children === 'undefined' ? null : children;
+    return CheckPermissions(authority, childrenRender, noMatch, currentAuthority);
+  }
+}
+
+Authorized.defaultProps = { noMatch: null }
 
 export default Authorized;
