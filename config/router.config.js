@@ -28,8 +28,26 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
+      { path: '/', redirect: 'menu/cloudAccounts', authority: ['ROLE_ADMIN', 'user'] },
+      // menu
+      {
+        path:'/menu',
+        icon:'menu',
+        name:'menu',
+        routes : [
+          {
+            path:'cloudAccounts',
+            name:'cloudAccounts',
+            component: './Menu/CloudAccounts'
+          },
+          {
+            path:'performanceTests',
+            name:'performanceTests',
+            component: './Menu/PerformanceTests'
+          }
+        ]
+      },
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['ROLE_ADMIN', 'user'] },
       {
         path: '/dashboard',
         name: 'dashboard',
