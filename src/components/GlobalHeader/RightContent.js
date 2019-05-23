@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
+import {Avatar as AvatarAlt} from 'react-avatar';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import NoticeIcon from '../NoticeIcon';
@@ -175,12 +176,17 @@ export default class GlobalHeaderRight extends PureComponent {
         {currentUser.name ? (
           <HeaderDropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
-              <Avatar
-                size="small"
-                className={styles.avatar}
-                src={currentUser.avatar}
-                alt="avatar"
-              />
+              {
+                currentUser.imageUrl?
+                  <Avatar
+                    size="small"
+                    className={styles.avatar}
+                    src={currentUser.imageUrl}
+                    alt={currentUser.name}
+                  /> : <AvatarAlt style={{marginRight: 8}} name={currentUser.name} size={24} round />
+
+              }
+
               <span className={styles.name}>{currentUser.name}</span>
             </span>
           </HeaderDropdown>

@@ -127,7 +127,7 @@ export async function getFakeCaptcha(mobile) {
 }
 
 export async function getAuthority() {
-  return request('http://localhost:8080/auth/authority', {
+  return request('http://localhost:8080/api/auth/authority', {
     headers : getAuthHeader()
   });
 }
