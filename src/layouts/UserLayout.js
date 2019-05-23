@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import Link from 'umi/link';
-import { Icon } from 'antd';
+import { Button, Layout, Menu, Row, Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
 import DocumentTitle from 'react-document-title';
-import SelectLang from '@/components/SelectLang';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
 import getPageTitle from '@/utils/getPageTitle';
+
+const { Header, Content } = Layout;
 
 const links = [
   {
@@ -30,7 +31,7 @@ const links = [
 
 const copyright = (
   <Fragment>
-    Copyright <Icon type="copyright" /> 2019 蚂蚁金服体验技术部出品
+    Copyright <Icon type="copyright" /> 2019 www.kandula.io
   </Fragment>
 );
 
@@ -54,24 +55,30 @@ class UserLayout extends Component {
     } = this.props;
     return (
       <DocumentTitle title={getPageTitle(pathname, breadcrumbNameMap)}>
-        <div className={styles.container}>
-          <div className={styles.lang}>
-            <SelectLang />
-          </div>
-          <div className={styles.content}>
+        <Layout className={styles.container}>
+          <Header className={styles.header}>
+            <div className={styles.logo} id="logo">
+              <Link to="/">
+                <img alt="logo" className={styles.logo} src={logo} />
+                <h1>Kandula</h1>
+              </Link>
+            </div>
+            <Menu mode="horizontal" style={{ lineHeight: '64px', fontSize: 16 }}>
+              <Menu.Item key="resources">Blog</Menu.Item>
+              <Menu.Item key="login">Login</Menu.Item>
+              <Menu.Item><Button type="primary">Sign up</Button></Menu.Item>
+            </Menu>
+          </Header>
+          <Content className={styles.content}>
             <div className={styles.top}>
-              <div className={styles.header}>
-                <Link to="/">
-                  <img alt="logo" className={styles.logo} src={logo} />
-                  <span className={styles.title}>Ant Design</span>
-                </Link>
+              <div className={styles.desc}>
+                <span style={{ fontSize: 20 }}>Sign up and start running tests!</span>
               </div>
-              <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
             </div>
             {children}
-          </div>
+          </Content>
           <GlobalFooter links={links} copyright={copyright} />
-        </div>
+        </Layout>
       </DocumentTitle>
     );
   }
