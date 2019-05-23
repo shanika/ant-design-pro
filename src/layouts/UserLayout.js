@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import Link from 'umi/link';
-import { Button, Layout, Menu, Row, Icon } from 'antd';
+import { Button, Layout, Menu, Icon } from 'antd';
 import GlobalFooter from '@/components/GlobalFooter';
 import DocumentTitle from 'react-document-title';
 import styles from './UserLayout.less';
