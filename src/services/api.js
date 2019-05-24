@@ -132,6 +132,10 @@ export async function getAuthority() {
   });
 }
 
+/*
+Cloud Accounts
+ */
+
 export async function getCloudAccounts() {
   return request('http://localhost:8080/api/workspaces/1/cloudAccounts', {
     headers : getAuthHeader()
@@ -166,3 +170,33 @@ export async function refreshCloudAccount(id) {
   });
 }
 
+/*
+ Performance Tests
+ */
+
+export async function getPerformanceTests() {
+  return request('http://localhost:8080/api/workspaces/1/tests', {
+    headers : getAuthHeader()
+  });
+}
+
+export async function getPerformanceTest(id) {
+  return request(`http://localhost:8080/api/workspaces/1/tests/${id}`, {
+    headers : getAuthHeader()
+  });
+}
+
+export async function addPerformanceTest(payload) {
+  return request('http://localhost:8080/api/workspaces/1/tests', {
+    headers : getAuthHeader(),
+    method: 'POST',
+    data: payload,
+  });
+}
+
+export async function removePerformanceTest(id) {
+  return request(`http://localhost:8080/api/workspaces/1/tests/${id}`, {
+    headers : getAuthHeader(),
+    method: 'DELETE',
+  });
+}

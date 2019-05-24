@@ -49,7 +49,7 @@ export default [
           {
             path:'performanceTests',
             name:'performanceTests',
-            component: './Menu/PerformanceTests'
+            component: './Menu/PerformanceTests/PerformanceTests'
           }
         ]
       },

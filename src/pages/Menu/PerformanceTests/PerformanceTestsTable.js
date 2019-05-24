@@ -1,17 +1,25 @@
-import { Button } from 'antd';
+import { Button, Tag } from 'antd';
 import React from 'react';
 import router from 'umi/router';
 
 const columns = (dispatch) => [
   {
-    title: 'Cloud Type',
-    dataIndex: 'cloudType',
-    key: 'cloudType',
-  },
-  {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
+  },
+  {
+    title: 'Con. Status',
+    dataIndex: 'configComplete',
+    key: 'configComplete',
+    render : (text) => (
+      <React.Fragment>{ text ? <Tag color="green">Complete</Tag> : <Tag color="red">Incomplete</Tag>}</React.Fragment>
+    )
+  },
+  {
+    title : 'Number of Executions',
+    dataIndex : 'testCount',
+    key : 'testCount',
   },
   {
     title: 'Actions',
@@ -22,16 +30,17 @@ const columns = (dispatch) => [
         <Button
           icon="setting"
           onClick={() => {
-            router.push(`/menu/cloudAccounts/${record.id}`);
+            router.push(`/menu/performanceTests/${record.id}`);
           }}
         >
-          Configure
+          View
         </Button>
         <Button
+          type="danger"
           icon="delete"
           onClick={() => {
             dispatch({
-              type: 'cloudAccounts/removeAccount',
+              type: 'performanceTests/removePerformanceTest',
               payload: record.id,
             });
           }}

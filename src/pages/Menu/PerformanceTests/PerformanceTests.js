@@ -2,16 +2,16 @@ import React, { PureComponent } from 'react';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { connect } from 'dva';
 import { Button, Table } from 'antd';
-import columns from './CloudAccountTable';
+import columns from './PerformanceTestsTable';
 import showModalForm, { updateModalProgress } from '../../../components/ModalForm/ModalForm';
-import AddCloudAccount from './AddCloudAccount';
+import AddPerformanceTest from './AddPerformanceTest';
 
-@connect(({ cloudAccounts : { list }, loading}) => ({
+@connect(({ performanceTests : { list }, loading}) => ({
   list,
-  loading : loading.effects['cloudAccounts/fetchAll'],
-  adding : loading.effects['cloudAccounts/add'],
+  loading : loading.effects['performanceTests/fetchAll'],
+  adding : loading.effects['performanceTests/add'],
 }))
-class CloudAccounts extends PureComponent {
+class PerformanceTests extends PureComponent {
 
   extra = (
     <div>
@@ -19,14 +19,14 @@ class CloudAccounts extends PureComponent {
         icon="plus"
         type="primary"
         onClick={() => {
-          this.addAccount = showModalForm({
-            content: AddCloudAccount,
+          this.addPerformanceTest = showModalForm({
+            content: AddPerformanceTest,
             title: 'Add New',
             okText: 'Add',
             onOk: values => {
               const { dispatch } = this.props;
               dispatch({
-                type: 'cloudAccounts/add',
+                type: 'performanceTests/add',
                 payload: values
               })
             },
@@ -41,17 +41,17 @@ class CloudAccounts extends PureComponent {
   componentWillMount(){
     const { dispatch} = this.props;
     dispatch({
-      type: 'cloudAccounts/fetchAll'
+      type: 'performanceTests/fetchAll'
     });
   }
 
   componentDidUpdate(prevProps) {
-    updateModalProgress(prevProps, this.props, 'adding', this.addAccount);
+    updateModalProgress(prevProps, this.props, 'adding', this.addPerformanceTest);
   }
 
   componentWillUnmount() {
-    if (this.addAccount) {
-      this.addAccount.destroy();
+    if (this.addPerformanceTest) {
+      this.addPerformanceTest.destroy();
     }
   }
 
@@ -61,9 +61,9 @@ class CloudAccounts extends PureComponent {
 
     return (
       <PageHeaderWrapper
-        hiddenBreadcrumb
-        title="Cloud Accounts"
         extra={this.extra}
+        hiddenBreadcrumb
+        title="Performance Tests"
       >
         <Table loading={loading} rowKey="id" dataSource={list} columns={columns(dispatch)} />
       </PageHeaderWrapper>
@@ -71,4 +71,5 @@ class CloudAccounts extends PureComponent {
   }
 }
 
-export default CloudAccounts;
+
+export default PerformanceTests;

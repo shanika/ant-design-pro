@@ -1,45 +1,39 @@
-import {
-  addCloudAccount,
-  getCloudAccount,
-  getCloudAccounts,
-  refreshCloudAccount,
-  removeCloudAccount,
-} from '../services/api';
+import { addPerformanceTest, getPerformanceTest, getPerformanceTests, removePerformanceTest } from '../services/api';
 
 export default {
-  namespace: 'cloudAccounts',
+  namespace: 'performanceTests',
   state: {
-    list : [],
-    account : {}
+    list: [],
+    performanceTest: {}
   },
   effects: {
     *fetchAll(action, { call, put }) {
       yield put({ type : 'clear' });
-      const accounts = yield call(getCloudAccounts);
+      const performanceTests = yield call(getPerformanceTests);
       yield put({
         type : 'setAll',
-        payload : accounts
+        payload : performanceTests
       })
     },
     *add({payload}, {call, put}) {
-      const cloudAccount = yield call(addCloudAccount, payload);
+      const performanceTest = yield call(addPerformanceTest, payload);
       yield put({
         type : 'addOne',
-        payload: cloudAccount
+        payload: performanceTest
       })
     },
-    *removeAccount({payload}, {call, put}) {
-      yield call(removeCloudAccount, payload);
+    *removePerformanceTest({payload}, {call, put}) {
+      yield call(removePerformanceTest, payload);
       yield put({
         type : 'remove',
         payload,
       })
     },
     *fetchOne({payload}, {call, put}) {
-      const account = yield call(getCloudAccount, payload);
+      const performanceTest = yield call(getPerformanceTest, payload);
       yield put({
         type : 'setOne',
-        payload : account
+        payload : performanceTest
       });
     },
     *unsetOne(action, {put}) {
@@ -47,13 +41,6 @@ export default {
         type : 'unsetAccount'
       });
     },
-    *refresh({payload}, {call, put}) {
-      const account = yield call(refreshCloudAccount, payload);
-      yield put({
-        type : 'setOne',
-        payload : account
-      });
-    }
   },
   reducers: {
     clear(state) {
@@ -83,13 +70,13 @@ export default {
     setOne(state, {payload}) {
       return {
         ...state,
-        account : payload
+        performanceTest : payload
       }
     },
     unsetAccount(state) {
       return {
         ...state,
-        account : {}
+        performanceTest : {}
       }
     }
   }
