@@ -131,3 +131,25 @@ export async function getAuthority() {
     headers : getAuthHeader()
   });
 }
+
+export async function getCloudAccounts() {
+  return request('http://localhost:8080/api/workspaces/1/cloudAccounts', {
+    headers : getAuthHeader()
+  });
+}
+
+export async function addCloudAccount(payload) {
+  return request('http://localhost:8080/api/workspaces/1/cloudAccounts', {
+    headers : getAuthHeader(),
+    method: 'POST',
+    data: payload,
+  });
+}
+
+export async function removeCloudAccount(id) {
+  return request(`http://localhost:8080/api/workspaces/1/cloudAccounts/${id}`, {
+    headers : getAuthHeader(),
+    method: 'DELETE',
+  });
+}
+

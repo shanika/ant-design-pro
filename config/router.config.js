@@ -38,7 +38,7 @@ export default [
           {
             path:'cloudAccounts',
             name:'cloudAccounts',
-            component: './Menu/CloudAccounts'
+            component: './Menu/CloudAccounts/CloudAccounts'
           },
           {
             path:'performanceTests',
