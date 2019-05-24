@@ -159,3 +159,10 @@ export async function removeCloudAccount(id) {
   });
 }
 
+export async function refreshCloudAccount(id) {
+  return request(`http://localhost:8080/api/workspaces/1/cloudAccounts/${id}/updateStatus`, {
+    headers : getAuthHeader(),
+    method: 'POST',
+  });
+}
+

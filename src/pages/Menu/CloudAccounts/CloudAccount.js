@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import router from 'umi/router';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { connect } from 'dva';
-import { message, Row, Col, Spin, Icon } from 'antd';
+import { Button, Col, Icon, message, Row, Spin } from 'antd';
 import FileUpload from './FileUpload';
 import { getAuthHeader } from '../../../utils/request';
 
@@ -10,6 +10,7 @@ import { getAuthHeader } from '../../../utils/request';
 @connect(({ cloudAccounts : { account }, loading}) => ({
   account,
   loading : loading.effects['cloudAccounts/fetchOne'],
+  updating : loading.effects['cloudAccounts/refresh']
 }))
 class CloudAccount extends PureComponent {
 
@@ -29,6 +30,25 @@ class CloudAccount extends PureComponent {
       type : 'cloudAccounts/unsetOne',
     });
   }
+
+  extra = () => {
+    const { dispatch, match, updating } = this.props;
+    return (
+      <Button
+        icon="sync"
+        type="primary"
+        loading={updating}
+        onClick={() => {
+          dispatch({
+            type: 'cloudAccounts/refresh',
+            payload: match.params.id,
+          });
+        }}
+      >
+        Refresh
+      </Button>
+    );
+  };
 
   onFileUploadChange = (info) => {
     const {dispatch} = this.props;
@@ -54,9 +74,11 @@ class CloudAccount extends PureComponent {
     return (
       <PageHeaderWrapper
         onBack={() => router.push("/menu/cloudAccounts")}
+        hiddenBreadcrumb
         title={account && account.name}
+        extra={this.extra()}
       >
-        <Row>
+        <Row gutter={16}>
           <Col sm={24} md={12}>
             <Spin spinning={uploading} indicator={<Icon type="loading" style={{ fontSize: 24 }} spin />}>
               <FileUpload

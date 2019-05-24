@@ -1,4 +1,10 @@
-import { addCloudAccount, getCloudAccount, getCloudAccounts, removeCloudAccount } from '../services/api';
+import {
+  addCloudAccount,
+  getCloudAccount,
+  getCloudAccounts,
+  refreshCloudAccount,
+  removeCloudAccount,
+} from '../services/api';
 
 export default {
   namespace: 'cloudAccounts',
@@ -39,6 +45,13 @@ export default {
     *unsetOne(action, {put}) {
       yield put({
         type : 'unsetAccount'
+      });
+    },
+    *refresh({payload}, {call, put}) {
+      const account = yield call(refreshCloudAccount, payload);
+      yield put({
+        type : 'setAccount',
+        payload : account
       });
     }
   },
