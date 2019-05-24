@@ -1,9 +1,10 @@
-import { addCloudAccount, getCloudAccounts, removeCloudAccount } from '../services/api';
+import { addCloudAccount, getCloudAccount, getCloudAccounts, removeCloudAccount } from '../services/api';
 
 export default {
   namespace: 'cloudAccounts',
   state: {
-    list : []
+    list : [],
+    account : {}
   },
   effects: {
     *fetchAll(action, { call, put }) {
@@ -27,6 +28,18 @@ export default {
         type : 'removeCloudAccounts',
         payload,
       })
+    },
+    *fetchOne({payload}, {call, put}) {
+      const account = yield call(getCloudAccount, payload);
+      yield put({
+        type : 'setAccount',
+        payload : account
+      });
+    },
+    *unsetOne(action, {put}) {
+      yield put({
+        type : 'unsetAccount'
+      });
     }
   },
   reducers: {
@@ -54,5 +67,17 @@ export default {
         list: state.list.filter( a => a.id !== payload),
       };
     },
+    setAccount(state, {payload}) {
+      return {
+        ...state,
+        account : payload
+      }
+    },
+    unsetAccount(state) {
+      return {
+        ...state,
+        account : {}
+      }
+    }
   }
 }

@@ -41,6 +41,12 @@ export default [
             component: './Menu/CloudAccounts/CloudAccounts'
           },
           {
+            path:'cloudAccounts/:id',
+            name:'cloudAccount',
+            component: './Menu/CloudAccounts/CloudAccount',
+            hideInMenu : true
+          },
+          {
             path:'performanceTests',
             name:'performanceTests',
             component: './Menu/PerformanceTests'

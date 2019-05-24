@@ -138,6 +138,12 @@ export async function getCloudAccounts() {
   });
 }
 
+export async function getCloudAccount(id) {
+  return request(`http://localhost:8080/api/workspaces/1/cloudAccounts/${id}`, {
+    headers : getAuthHeader()
+  });
+}
+
 export async function addCloudAccount(payload) {
   return request('http://localhost:8080/api/workspaces/1/cloudAccounts', {
     headers : getAuthHeader(),

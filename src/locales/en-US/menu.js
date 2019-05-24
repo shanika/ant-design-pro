@@ -9,6 +9,7 @@ export default {
   'menu.dashboard.workplace': 'Workplace',
   'menu.menu' : 'Menu',
   'menu.menu.cloudAccounts' : 'Cloud Accounts',
+  'menu.menu.cloudAccount' : 'Cloud Account',
   'menu.menu.performanceTests' : 'Performance Tests',
   'menu.form': 'Form',
   'menu.form.basicform': 'Basic Form',

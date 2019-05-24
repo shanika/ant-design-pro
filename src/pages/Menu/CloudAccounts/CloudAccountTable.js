@@ -1,5 +1,6 @@
 import { Button } from 'antd';
 import React from 'react';
+import router from 'umi/router';
 
 const columns = (dispatch) => [
   {
@@ -17,17 +18,27 @@ const columns = (dispatch) => [
     dataIndex: 'id',
     key: 'id',
     render: (text, record) => (
-      <Button
-        icon="delete"
-        onClick={() => {
-          dispatch({
-            type: 'cloudAccounts/remove',
-            payload: record.id,
-          });
-        }}
-      >
-        Remove
-      </Button>
+      <React.Fragment>
+        <Button
+          icon="setting"
+          onClick={() => {
+            router.push(`/menu/cloudAccounts/${record.id}`);
+          }}
+        >
+          Configure
+        </Button>
+        <Button
+          icon="delete"
+          onClick={() => {
+            dispatch({
+              type: 'cloudAccounts/remove',
+              payload: record.id,
+            });
+          }}
+        >
+          Remove
+        </Button>
+      </React.Fragment>
     ),
   },
 ];
