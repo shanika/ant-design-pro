@@ -86,7 +86,7 @@ class CloudAccount extends PureComponent {
                 name="file"
                 multiple={false}
                 accept=".json"
-                action={`http://localhost:8080/api/workspaces/1/cloudAccounts/${match.params.id}/serviceAccFile`}
+                action={`/api/workspaces/1/cloudAccounts/${match.params.id}/serviceAccFile`}
                 onChange={this.onFileUploadChange}
                 headers={getAuthHeader()}
                 showUploadList={false}

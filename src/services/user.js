@@ -6,7 +6,7 @@ export async function query() {
 }
 
 export async function queryCurrent() {
-  return request('http://localhost:8080/api/user/me', {
+  return request('/api/user/me', {
     headers : getAuthHeader()
   });
 }

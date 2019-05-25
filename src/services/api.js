@@ -105,7 +105,7 @@ export async function updateFakeList(params) {
 }
 
 export async function fakeAccountLogin(params) {
-  return request('http://localhost:8080/auth/login', {
+  return request('/auth/login', {
     method: 'POST',
     data: params,
   });
@@ -127,7 +127,7 @@ export async function getFakeCaptcha(mobile) {
 }
 
 export async function getAuthority() {
-  return request('http://localhost:8080/api/auth/authority', {
+  return request('/api/auth/authority', {
     headers : getAuthHeader()
   });
 }
@@ -137,19 +137,19 @@ Cloud Accounts
  */
 
 export async function getCloudAccounts() {
-  return request('http://localhost:8080/api/workspaces/1/cloudAccounts', {
+  return request('/api/workspaces/1/cloudAccounts', {
     headers : getAuthHeader()
   });
 }
 
 export async function getCloudAccount(id) {
-  return request(`http://localhost:8080/api/workspaces/1/cloudAccounts/${id}`, {
+  return request(`/api/workspaces/1/cloudAccounts/${id}`, {
     headers : getAuthHeader()
   });
 }
 
 export async function addCloudAccount(payload) {
-  return request('http://localhost:8080/api/workspaces/1/cloudAccounts', {
+  return request('/api/workspaces/1/cloudAccounts', {
     headers : getAuthHeader(),
     method: 'POST',
     data: payload,
@@ -157,14 +157,14 @@ export async function addCloudAccount(payload) {
 }
 
 export async function removeCloudAccount(id) {
-  return request(`http://localhost:8080/api/workspaces/1/cloudAccounts/${id}`, {
+  return request(`/api/workspaces/1/cloudAccounts/${id}`, {
     headers : getAuthHeader(),
     method: 'DELETE',
   });
 }
 
 export async function refreshCloudAccount(id) {
-  return request(`http://localhost:8080/api/workspaces/1/cloudAccounts/${id}/updateStatus`, {
+  return request(`/api/workspaces/1/cloudAccounts/${id}/updateStatus`, {
     headers : getAuthHeader(),
     method: 'POST',
   });
@@ -175,19 +175,19 @@ export async function refreshCloudAccount(id) {
  */
 
 export async function getPerformanceTests() {
-  return request('http://localhost:8080/api/workspaces/1/tests', {
+  return request('/api/workspaces/1/tests', {
     headers : getAuthHeader()
   });
 }
 
 export async function getPerformanceTest(id) {
-  return request(`http://localhost:8080/api/workspaces/1/tests/${id}`, {
+  return request(`/api/workspaces/1/tests/${id}`, {
     headers : getAuthHeader()
   });
 }
 
 export async function addPerformanceTest(payload) {
-  return request('http://localhost:8080/api/workspaces/1/tests', {
+  return request('/api/workspaces/1/tests', {
     headers : getAuthHeader(),
     method: 'POST',
     data: payload,
@@ -195,7 +195,7 @@ export async function addPerformanceTest(payload) {
 }
 
 export async function savePerformanceTest( id, payload) {
-  return request(`http://localhost:8080/api/workspaces/1/tests/${id}`, {
+  return request(`/api/workspaces/1/tests/${id}`, {
     headers : getAuthHeader(),
     method: 'PUT',
     data: payload,
@@ -203,7 +203,7 @@ export async function savePerformanceTest( id, payload) {
 }
 
 export async function removePerformanceTest(id) {
-  return request(`http://localhost:8080/api/workspaces/1/tests/${id}`, {
+  return request(`/api/workspaces/1/tests/${id}`, {
     headers : getAuthHeader(),
     method: 'DELETE',
   });
@@ -212,15 +212,14 @@ export async function removePerformanceTest(id) {
 /*
 Meta Data
  */
-
 export async function getLocationsList() {
-  return request('http://localhost:8080/api/data/locations?cloudType=GCP', {
+  return request('/api/data/locations?cloudType=GCP', {
     headers : getAuthHeader()
   });
 }
 
 export async function getVmTypes() {
-  return request('http://localhost:8080/api/data/vmTypes?cloudType=GCP', {
+  return request('/api/data/vmTypes?cloudType=GCP', {
     headers : getAuthHeader()
   });
 }

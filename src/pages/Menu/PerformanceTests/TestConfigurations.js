@@ -161,7 +161,7 @@ class Configure extends PureComponent {
             name="file"
             multiple={false}
             accept=".jmx"
-            action={`http://localhost:8080/api/workspaces/1/tests/${performanceTest.id}/uploadScript`}
+            action={`/api/workspaces/1/tests/${performanceTest.id}/uploadScript`}
             onChange={this.onFileUploadChange}
             headers={getAuthHeader()}
             showUploadList={false}
