@@ -50,6 +50,12 @@ export default [
             path:'performanceTests',
             name:'performanceTests',
             component: './Menu/PerformanceTests/PerformanceTests'
+          },
+          {
+            path:'performanceTests/:id',
+            name:'performanceTests',
+            component: './Menu/PerformanceTests/PerformanceTest',
+            hideInMenu : true
           }
         ]
       },
