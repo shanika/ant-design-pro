@@ -12,6 +12,7 @@ body,
 
 .ant-layout {
   min-height: 100vh;
+  background-color: #fbfbfd;
 }
 
 canvas {
@@ -62,12 +63,15 @@ ol {
 
 .ant-menu {
   padding: 16px 16px !important;
-  font-weight: bold !important;
+  font-weight: 600 !important;
   font-size: 16px !important;
 
   .ant-menu-submenu-title {
     padding-left: 8px !important;
     color: #05666d !important;
+    i {
+      background: #05666d !important;
+    }
   }
 
   a {
@@ -75,7 +79,14 @@ ol {
   }
 
   .ant-menu-item {
+    height: 44px !important;
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+    padding-top: 2px !important;
     padding-left: 16px !important;
+    i {
+      font-size: 18px !important;
+    }
   }
 
   .ant-menu-item-selected {
@@ -90,5 +101,54 @@ ol {
 }
 
 .ant-menu-sub {
+  padding: 0 !important;
   box-shadow: none !important;
 }
+
+.ant-btn {
+  box-shadow: 0 3px 5px rgb(219, 217, 217);
+  border: 1px solid rgb(219, 217, 217);
+  min-width: 130px;
+  color: rgb(87, 87, 87);
+  font-weight: 600;
+  min-height: 45px;
+
+  &:hover {
+    border: 1px solid rgb(219, 217, 217);
+    color: inherit;
+    transition: none;
+    box-shadow: 0 3px 5px rgb(219, 217, 217);
+    opacity: 0.7;
+  }
+
+  &.ant-btn-primary {
+    color: #fff;
+
+    background-color: #36cfc9;
+    border: none;
+    box-shadow: 1px 4px 8px 0 rgb(53, 170, 166);
+  }
+}
+
+.ant-table-column-title {
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}
+
+.ant-page-header-content-view {
+  display: none !important;
+}
+
+.ant-page-header {
+  padding-bottom: 10px !important;
+}
+
+.ant-table-wrapper {
+  border-bottom: none !important;
+}
+
+.ant-table-pagination.ant-pagination {
+  float: none !important;
+  padding-left: 15px;
+}
+

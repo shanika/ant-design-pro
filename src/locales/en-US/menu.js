@@ -7,7 +7,7 @@ export default {
   'menu.dashboard.analysis': 'Analysis',
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Workplace',
-  'menu.menu' : 'Menu',
+  'menu.menu' : 'MENU',
   'menu.menu.cloudAccounts' : 'Cloud Accounts',
   'menu.menu.cloudAccounts.cloudAccounts' : 'Cloud Accounts',
   'menu.menu.cloudAccounts.cloudAccountsList' : 'Cloud Accounts',

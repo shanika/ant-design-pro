@@ -1,7 +1,9 @@
 @import '~antd/lib/style/themes/default.less';
 
 .children-content {
-  margin: 24px 24px 0;
+  margin: 0;
+  border-right: 1px solid #e8e8e8;
+  border-left: 1px solid #e8e8e8;
 }
 
 .main {
@@ -9,7 +11,16 @@
     .ant-page-header {
       padding: 16px 32px 0;
       background: #fff;
-      border-bottom: 1px solid #e8e8e8;
+      border: 1px solid #e8e8e8;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+      h4 {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        font-weight: normal;
+        font-size: 20px;
+      }
     }
   }
 
@@ -107,4 +118,9 @@
       display: block;
     }
   }
+
+  min-height: 70vh;
+  margin: 1%;
+  background-color: #fff;
+  border-radius: 5px;
 }

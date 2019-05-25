@@ -82,6 +82,7 @@ export default {
     'menu-dark-submenu-bg' : primaryColor,
     'font-family': 'Poppins',
     'font-size-base': '15px',
+    'layout-header-height': '80px'
   },
   proxy: {
     "/api": {
