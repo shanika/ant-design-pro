@@ -9,6 +9,12 @@ class PerformanceTests extends PureComponent {
     dispatch({
       type: 'performanceTests/fetchAll'
     });
+    dispatch({
+      type : 'metaData/fetchLocations'
+    });
+    dispatch({
+      type : 'metaData/fetchVmTypes'
+    });
   }
 
   componentWillUnmount() {

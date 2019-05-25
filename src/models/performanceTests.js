@@ -1,10 +1,18 @@
-import { addPerformanceTest, getPerformanceTest, getPerformanceTests, removePerformanceTest } from '../services/api';
+import { message } from 'antd';
+import {
+  addPerformanceTest,
+  getPerformanceTest,
+  getPerformanceTests,
+  removePerformanceTest,
+  savePerformanceTest,
+} from '../services/api';
 
 export default {
   namespace: 'performanceTests',
   state: {
     list: [],
-    performanceTest: {}
+    performanceTest: {},
+    showConfig : true
   },
   effects: {
     *fetchAll(action, { call, put }) {
@@ -22,12 +30,24 @@ export default {
         payload: performanceTest
       })
     },
+    *update({payload : {id, values}}, {call, put}) {
+      const performanceTest = yield call(savePerformanceTest, id, values);
+      yield put({
+        type : 'setOne',
+        payload: performanceTest
+      });
+      yield put({
+        type : 'setShowConfig',
+        payload : false
+      });
+      message.success('Test Configurations saved.');
+    },
     *removePerformanceTest({payload}, {call, put}) {
       yield call(removePerformanceTest, payload);
       yield put({
         type : 'remove',
         payload,
-      })
+      });
     },
     *fetchOne({payload}, {call, put}) {
       const performanceTest = yield call(getPerformanceTest, payload);
@@ -77,6 +97,12 @@ export default {
       return {
         ...state,
         performanceTest : {}
+      }
+    },
+    setShowConfig(state, { payload }) {
+      return {
+        ...state,
+        showConfig : payload
       }
     }
   }

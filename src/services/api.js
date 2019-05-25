@@ -194,9 +194,36 @@ export async function addPerformanceTest(payload) {
   });
 }
 
+export async function savePerformanceTest( id, payload) {
+  return request(`http://localhost:8080/api/workspaces/1/tests/${id}`, {
+    headers : getAuthHeader(),
+    method: 'PUT',
+    data: payload,
+  });
+}
+
 export async function removePerformanceTest(id) {
   return request(`http://localhost:8080/api/workspaces/1/tests/${id}`, {
     headers : getAuthHeader(),
     method: 'DELETE',
   });
 }
+
+/*
+Meta Data
+ */
+
+export async function getLocationsList() {
+  return request('http://localhost:8080/api/data/locations?cloudType=GCP', {
+    headers : getAuthHeader()
+  });
+}
+
+export async function getVmTypes() {
+  return request('http://localhost:8080/api/data/vmTypes?cloudType=GCP', {
+    headers : getAuthHeader()
+  });
+}
+
+
+
