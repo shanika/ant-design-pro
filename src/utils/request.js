@@ -71,6 +71,7 @@ export const getAuthHeader = () => {
  */
 const request = extend({
   errorHandler, // Default error handling
+  headers : getAuthHeader()
 });
 
 export default request;
