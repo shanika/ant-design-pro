@@ -77,6 +77,11 @@ export default {
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
     'primary-color': primaryColor,
+    'layout-sider-background' : primaryColor,
+    'menu-dark-bg' : primaryColor,
+    'menu-dark-submenu-bg' : primaryColor,
+    'font-family': 'Poppins',
+    'font-size-base': '15px',
   },
   proxy: {
     "/api": {

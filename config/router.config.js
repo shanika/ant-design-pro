@@ -32,13 +32,13 @@ export default [
       // menu
       {
         path:'/menu',
-        icon:'menu',
         name:'menu',
         routes : [
           {
             path:'/menu/cloudAccounts',
             name:'cloudAccounts',
             component: './Menu/CloudAccounts',
+            icon: 'cloud',
             hideChildrenInMenu: true,
             routes : [
               {
@@ -61,6 +61,7 @@ export default [
             path:'/menu/performanceTests',
             name:'performanceTests',
             component: './Menu/PerformanceTests',
+            icon: 'bar-chart',
             hideChildrenInMenu: true,
             routes : [
               {
