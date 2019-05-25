@@ -36,27 +36,49 @@ export default [
         name:'menu',
         routes : [
           {
-            path:'cloudAccounts',
+            path:'/menu/cloudAccounts',
             name:'cloudAccounts',
-            component: './Menu/CloudAccounts/CloudAccounts'
+            component: './Menu/CloudAccounts',
+            hideChildrenInMenu: true,
+            routes : [
+              {
+                path: '/menu/cloudAccounts',
+                redirect: '/menu/cloudAccounts/list',
+              },
+              {
+                path: '/menu/cloudAccounts/list',
+                name: 'cloudAccountsList',
+                component: './Menu/CloudAccounts/CloudAccountsList',
+              },
+              {
+                path:'/menu/cloudAccounts/:id',
+                name:'cloudAccount',
+                component: './Menu/CloudAccounts/CloudAccount',
+              }
+            ]
           },
           {
-            path:'cloudAccounts/:id',
-            name:'cloudAccount',
-            component: './Menu/CloudAccounts/CloudAccount',
-            hideInMenu : true
-          },
-          {
-            path:'performanceTests',
+            path:'/menu/performanceTests',
             name:'performanceTests',
-            component: './Menu/PerformanceTests/PerformanceTests'
+            component: './Menu/PerformanceTests',
+            hideChildrenInMenu: true,
+            routes : [
+              {
+                path: '/menu/performanceTests',
+                redirect: '/menu/performanceTests/list',
+              },
+              {
+                path:'/menu/performanceTests/list',
+                name:'performanceTestsList',
+                component: './Menu/PerformanceTests/PerformanceTestsList',
+              },
+              {
+                path:'/menu/performanceTests/:id',
+                name:'performanceTest',
+                component: './Menu/PerformanceTests/PerformanceTest',
+              }
+            ]
           },
-          {
-            path:'performanceTests/:id',
-            name:'performanceTests',
-            component: './Menu/PerformanceTests/PerformanceTest',
-            hideInMenu : true
-          }
         ]
       },
       // dashboard
