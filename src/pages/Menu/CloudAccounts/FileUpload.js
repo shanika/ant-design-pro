@@ -9,7 +9,7 @@ class FileUpload extends PureComponent {
     return (
       <Dragger {...this.props}>
         <p className="ant-upload-drag-icon">
-          <Icon type="inbox" />
+          <Icon type="cloud-upload" />
         </p>
         <p className="ant-upload-text"> { title || 'Click or drag file to this area to upload' }</p>
         <p className="ant-upload-hint">
