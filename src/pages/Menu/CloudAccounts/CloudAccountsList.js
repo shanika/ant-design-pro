@@ -5,6 +5,7 @@ import { Button, Table } from 'antd';
 import columns from './CloudAccountTable';
 import showModalForm, { updateModalProgress } from '../../../components/ModalForm/ModalForm';
 import AddCloudAccount from './AddCloudAccount';
+import LearnHow from '../../../components/LearnHow';
 
 @connect(({ cloudAccounts : { list }, loading}) => ({
   list,
@@ -58,7 +59,11 @@ class CloudAccountsList extends PureComponent {
         title="Cloud Accounts"
         extra={this.extra}
       >
-        <Table loading={loading} rowKey="id" dataSource={list} columns={columns(dispatch)} />
+        <Table className="learn-how-enabled" loading={loading} rowKey="id" dataSource={list} columns={columns(dispatch)} />
+        <LearnHow
+          title="Learn how to CREATE and CONFIGURE NEW CLOUD ACCOUNT?"
+          text="A complete guide to setup new cloud account and configure it..."
+        />
       </PageHeaderWrapper>
     );
   }
