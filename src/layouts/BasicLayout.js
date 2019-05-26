@@ -70,10 +70,10 @@ class BasicLayout extends React.Component {
   }
 
   getLayoutStyle = () => {
-    const { fixSiderbar, isMobile, collapsed, layout } = this.props;
-    if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
+    const { isMobile, collapsed, layout } = this.props;
+    if (layout !== 'topmenu' && !isMobile) {
       return {
-        paddingLeft: collapsed ? '80px' : '256px',
+        paddingLeft: collapsed ? '80px' : '290px',
       };
     }
     return null;
