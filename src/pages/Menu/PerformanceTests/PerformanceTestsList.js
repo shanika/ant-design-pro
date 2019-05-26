@@ -5,6 +5,7 @@ import { Button, Table } from 'antd';
 import columns from './PerformanceTestsTable';
 import showModalForm, { updateModalProgress } from '../../../components/ModalForm/ModalForm';
 import AddPerformanceTest from './AddPerformanceTest';
+import LearnHow from '../../../components/LearnHow';
 
 @connect(({ performanceTests : { list }, loading}) => ({
   list,
@@ -58,7 +59,11 @@ class PerformanceTestsList extends PureComponent {
         hiddenBreadcrumb
         title="Performance Tests"
       >
-        <Table loading={loading} rowKey="id" dataSource={list} columns={columns(dispatch)} />
+        <Table className="learn-how-enabled" loading={loading} rowKey="id" dataSource={list} columns={columns(dispatch)} />
+        <LearnHow
+          title="Learn how to CREATE, CONFIGURE and EXECUTE PERFORMANCE TEST"
+          text="A complete guide to create, configure and execute performance tests…"
+        />
       </PageHeaderWrapper>
     );
   }

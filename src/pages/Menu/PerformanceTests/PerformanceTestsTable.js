@@ -1,10 +1,11 @@
-import { Button, Tag } from 'antd';
+import { Button, Icon } from 'antd';
 import React from 'react';
 import router from 'umi/router';
+import StatusBadge from '../../../components/StatusBadge';
 
 const columns = (dispatch) => [
   {
-    title: 'Name',
+    title: 'Test Name',
     dataIndex: 'name',
     key: 'name',
   },
@@ -13,7 +14,7 @@ const columns = (dispatch) => [
     dataIndex: 'configComplete',
     key: 'configComplete',
     render : (text) => (
-      <React.Fragment>{ text ? <Tag color="green">Complete</Tag> : <Tag color="red">Incomplete</Tag>}</React.Fragment>
+      <StatusBadge type={text? 'success' : 'danger'} text={text ? 'Complete' : 'Incomplete'} />
     )
   },
   {
@@ -28,25 +29,25 @@ const columns = (dispatch) => [
     render: (text, record) => (
       <React.Fragment>
         <Button
-          icon="setting"
           onClick={() => {
             router.push(`/menu/performanceTests/${record.id}`);
           }}
         >
           View
         </Button>
-        <Button
-          type="danger"
-          icon="delete"
+
+        <Icon
+          style={{ marginLeft: 16 }}
           onClick={() => {
             dispatch({
               type: 'performanceTests/removePerformanceTest',
               payload: record.id,
             });
           }}
-        >
-          Remove
-        </Button>
+          twoToneColor="#eb2f96"
+          type="delete"
+          theme="twoTone"
+        />
       </React.Fragment>
     ),
   },

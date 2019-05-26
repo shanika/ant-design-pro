@@ -24,12 +24,11 @@ class PerformanceTest extends PureComponent {
   }
 
   extra = () => {
-    const { dispatch} = this.props;
+    const { dispatch, performanceTest} = this.props;
     return (
       <div>
         <Button
-          icon="settings"
-          type="primary"
+          icon="setting"
           onClick={() => {
             dispatch({
               type : 'performanceTests/setShowConfig',
@@ -39,6 +38,15 @@ class PerformanceTest extends PureComponent {
         >
           Configure
         </Button>
+        {
+          performanceTest && performanceTest.configComplete &&
+          <Button
+            type="primary"
+            icon="caret-right"
+          >
+            Run
+          </Button>
+        }
       </div>
     );
   };
