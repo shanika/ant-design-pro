@@ -1,4 +1,5 @@
 import { query as queryUsers, queryCurrent } from '@/services/user';
+import { addWorkspace, removeWorkspace, switchWorkspace } from '../services/api';
 
 export default {
   namespace: 'user',
@@ -23,6 +24,27 @@ export default {
         payload: response,
       });
     },
+    *addWorkspace({ payload }, { call, put}) {
+      const workspace = yield call(addWorkspace, payload);
+      yield put({
+        type : 'addNewWorkspace',
+        payload: workspace
+      })
+    },
+    *deleteWorkspace({ payload }, { call, put}) {
+      yield call(removeWorkspace, payload);
+      yield put({
+        type : 'removeWorkspace',
+        payload
+      })
+    },
+    *switchWorkSpace({payload}, {call, put}) {
+      const ws = yield call(switchWorkspace, payload);
+      yield put({
+        type : 'changeWorkspace',
+        payload : ws.id
+      });
+    }
   },
 
   reducers: {
@@ -48,5 +70,32 @@ export default {
         },
       };
     },
+    addNewWorkspace(state, { payload }) {
+      return {
+        ...state,
+        currentUser : {
+          ...state.currentUser,
+          workspaceResponse : [...state.currentUser.workspaceResponse, payload]
+        }
+      }
+    },
+    removeWorkspace(state, { payload }) {
+      return {
+        ...state,
+        currentUser : {
+          ...state.currentUser,
+          workspaceResponse : state.currentUser.workspaceResponse.filter(ws => ws.id !== payload)
+        }
+      }
+    },
+    changeWorkspace(state, { payload }) {
+      return {
+        ...state,
+        currentUser : {
+          ...state.currentUser,
+          currentWorkspaceId : payload
+        }
+      }
+    }
   },
 };

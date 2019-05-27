@@ -23,10 +23,8 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 16px;
     margin-bottom: 16px;
     padding: 4px 8px;
-    background-color: #006d75;
     border-radius: 5px;
 
     .leftContent {
@@ -60,4 +58,22 @@
     }
   }
 
+  .active {
+    background-color: #006d75;
+  }
+
+  .inactive {
+    background-color: rgba(0, 163, 171, 0.71);
+    cursor: pointer;
+    &:hover {
+      background-color: #00838b;
+    }
+  }
+}
+
+.danger {
+  color: rgba(245, 34, 45, 0.67);
+  &:hover {
+    color: #f5222d !important;
+  }
 }

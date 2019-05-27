@@ -1,4 +1,4 @@
-import { queryNotices } from '@/services/api';
+
 
 export default {
   namespace: 'global',
@@ -9,8 +9,8 @@ export default {
   },
 
   effects: {
-    *fetchNotices(_, { call, put, select }) {
-      const data = yield call(queryNotices);
+    *fetchNotices(_, { put, select }) {
+      const data = [];
       yield put({
         type: 'saveNotices',
         payload: data,

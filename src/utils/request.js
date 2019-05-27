@@ -71,7 +71,20 @@ export const getAuthHeader = () => {
  */
 const request = extend({
   errorHandler, // Default error handling
-  headers : getAuthHeader()
 });
+
+request.interceptors.request.use((url, options) => {
+  return (
+    {
+      url,
+      options: {
+        ...options,
+        headers : getAuthHeader(),
+        interceptors: true
+      },
+    }
+  );
+});
+
 
 export default request;
