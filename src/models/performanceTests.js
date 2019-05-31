@@ -15,23 +15,26 @@ export default {
     showConfig : true
   },
   effects: {
-    *fetchAll(action, { call, put }) {
+    *fetchAll(action, { call, put, select }) {
       yield put({ type : 'clear' });
-      const performanceTests = yield call(getPerformanceTests);
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const performanceTests = yield call(getPerformanceTests, workspaceId);
       yield put({
         type : 'setAll',
         payload : performanceTests
       })
     },
-    *add({payload}, {call, put}) {
-      const performanceTest = yield call(addPerformanceTest, payload);
+    *add({payload}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const performanceTest = yield call(addPerformanceTest, workspaceId, payload);
       yield put({
         type : 'addOne',
         payload: performanceTest
       })
     },
-    *update({payload : {id, values}}, {call, put}) {
-      const performanceTest = yield call(savePerformanceTest, id, values);
+    *update({payload : {id, values}}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const performanceTest = yield call(savePerformanceTest, workspaceId, id, values);
       yield put({
         type : 'setOne',
         payload: performanceTest
@@ -42,15 +45,17 @@ export default {
       });
       message.success('Test Configurations saved.');
     },
-    *removePerformanceTest({payload}, {call, put}) {
-      yield call(removePerformanceTest, payload);
+    *removePerformanceTest({payload}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      yield call(removePerformanceTest, workspaceId, payload);
       yield put({
         type : 'remove',
         payload,
       });
     },
-    *fetchOne({payload}, {call, put}) {
-      const performanceTest = yield call(getPerformanceTest, payload);
+    *fetchOne({payload}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const performanceTest = yield call(getPerformanceTest, workspaceId, payload);
       yield put({
         type : 'setOne',
         payload : performanceTest

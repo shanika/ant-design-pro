@@ -13,30 +13,34 @@ export default {
     account : {}
   },
   effects: {
-    *fetchAll(action, { call, put }) {
+    *fetchAll(action, { call, put, select }) {
       yield put({ type : 'clear' });
-      const accounts = yield call(getCloudAccounts);
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const accounts = yield call(getCloudAccounts, workspaceId);
       yield put({
         type : 'setAll',
         payload : accounts
       })
     },
-    *add({payload}, {call, put}) {
-      const cloudAccount = yield call(addCloudAccount, payload);
+    *add({payload}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const cloudAccount = yield call(addCloudAccount, workspaceId, payload);
       yield put({
         type : 'addOne',
         payload: cloudAccount
       })
     },
-    *removeAccount({payload}, {call, put}) {
-      yield call(removeCloudAccount, payload);
+    *removeAccount({payload}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      yield call(removeCloudAccount, workspaceId, payload);
       yield put({
         type : 'remove',
         payload,
       })
     },
-    *fetchOne({payload}, {call, put}) {
-      const account = yield call(getCloudAccount, payload);
+    *fetchOne({payload}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const account = yield call(getCloudAccount, workspaceId, payload);
       yield put({
         type : 'setOne',
         payload : account
@@ -47,8 +51,9 @@ export default {
         type : 'unsetAccount'
       });
     },
-    *refresh({payload}, {call, put}) {
-      const account = yield call(refreshCloudAccount, payload);
+    *refresh({payload}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const account = yield call(refreshCloudAccount, workspaceId, payload);
       yield put({
         type : 'setOne',
         payload : account

@@ -27,31 +27,31 @@ export async function accountRegister(params) {
 Cloud Accounts
  */
 
-export async function getCloudAccounts() {
-  return request('/api/workspaces/1/cloudAccounts', {
+export async function getCloudAccounts(workspaceId) {
+  return request(`/api/workspaces/${workspaceId}/cloudAccounts`, {
     headers : getAuthHeader()
   });
 }
 
-export async function getCloudAccount(id) {
-  return request(`/api/workspaces/1/cloudAccounts/${id}`);
+export async function getCloudAccount(workspaceId, id) {
+  return request(`/api/workspaces/${workspaceId}/cloudAccounts/${id}`);
 }
 
-export async function addCloudAccount(payload) {
-  return request('/api/workspaces/1/cloudAccounts', {
+export async function addCloudAccount(workspaceId, payload) {
+  return request(`/api/workspaces/${workspaceId}/cloudAccounts`, {
     method: 'POST',
     data: payload,
   });
 }
 
-export async function removeCloudAccount(id) {
-  return request(`/api/workspaces/1/cloudAccounts/${id}`, {
+export async function removeCloudAccount(workspaceId, id) {
+  return request(`/api/workspaces/${workspaceId}/cloudAccounts/${id}`, {
     method: 'DELETE',
   });
 }
 
-export async function refreshCloudAccount(id) {
-  return request(`/api/workspaces/1/cloudAccounts/${id}/updateStatus`, {
+export async function refreshCloudAccount(workspaceId, id) {
+  return request(`/api/workspaces/${workspaceId}/cloudAccounts/${id}/updateStatus`, {
     method: 'POST',
   });
 }
@@ -60,30 +60,30 @@ export async function refreshCloudAccount(id) {
  Performance Tests
  */
 
-export async function getPerformanceTests() {
-  return request('/api/workspaces/1/tests');
+export async function getPerformanceTests(workspaceId) {
+  return request(`/api/workspaces/${workspaceId}/tests`);
 }
 
-export async function getPerformanceTest(id) {
-  return request(`/api/workspaces/1/tests/${id}`);
+export async function getPerformanceTest(workspaceId, id) {
+  return request(`/api/workspaces/${workspaceId}/tests/${id}`);
 }
 
-export async function addPerformanceTest(payload) {
-  return request('/api/workspaces/1/tests', {
+export async function addPerformanceTest(workspaceId, payload) {
+  return request(`/api/workspaces/${workspaceId}/tests`, {
     method: 'POST',
     data: payload,
   });
 }
 
-export async function savePerformanceTest( id, payload) {
-  return request(`/api/workspaces/1/tests/${id}`, {
+export async function savePerformanceTest(workspaceId, id, payload) {
+  return request(`/api/workspaces/${workspaceId}/tests/${id}`, {
     method: 'PUT',
     data: payload,
   });
 }
 
-export async function removePerformanceTest(id) {
-  return request(`/api/workspaces/1/tests/${id}`, {
+export async function removePerformanceTest(workspaceId, id) {
+  return request(`/api/workspaces/${workspaceId}/tests/${id}`, {
     method: 'DELETE',
   });
 }

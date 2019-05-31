@@ -9,8 +9,9 @@ export default {
   },
 
   effects : {
-    *fetchCloudAccounts(action, {call, put}) {
-      const cloudAccounts = yield call(getCloudAccounts);
+    *fetchCloudAccounts(action, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const cloudAccounts = yield call(getCloudAccounts, workspaceId);
       yield put({
         type : 'setCloudAccounts',
         payload : cloudAccounts
