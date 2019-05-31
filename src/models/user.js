@@ -1,5 +1,6 @@
 import { query as queryUsers, queryCurrent } from '@/services/user';
 import { addWorkspace, removeWorkspace, switchWorkspace } from '../services/api';
+import router from 'umi/router';
 
 export default {
   namespace: 'user',
@@ -44,6 +45,7 @@ export default {
         type : 'changeWorkspace',
         payload : ws.id
       });
+      router.go('/menu/performanceTests/list');
     }
   },
 

@@ -109,6 +109,6 @@ export default {
         ...state,
         showConfig : payload
       }
-    }
+    },
   }
 }
