@@ -88,6 +88,16 @@ export async function removePerformanceTest(workspaceId, id) {
   });
 }
 
+export async function runPerformanceTest(workspaceId, id) {
+  return request(`/api/workspaces/${workspaceId}/tests/${id}/start`, {
+    method: 'PUT',
+  });
+}
+
+export async function getStatus(workspaceId) {
+  return request(`/api/workspaces/${workspaceId}/tests/status`);
+}
+
 /*
 Meta Data
  */

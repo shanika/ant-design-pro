@@ -2,8 +2,8 @@ import { message } from 'antd';
 import {
   addPerformanceTest,
   getPerformanceTest,
-  getPerformanceTests,
-  removePerformanceTest,
+  getPerformanceTests, getStatus,
+  removePerformanceTest, runPerformanceTest,
   savePerformanceTest,
 } from '../services/api';
 
@@ -66,6 +66,18 @@ export default {
         type : 'unsetAccount'
       });
     },
+    *runTest({ payload }, { call, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      yield call(runPerformanceTest, workspaceId, payload);
+    },
+    *updateStatus (action, { put, call, select}) {
+       const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+       const testStatus = yield call(getStatus, workspaceId);
+        yield put({
+          type : 'setTestStatus',
+          payload : testStatus
+        });
+    }
   },
   reducers: {
     clear(state) {
@@ -110,5 +122,18 @@ export default {
         showConfig : payload
       }
     },
+    setTestStatus(state, { payload }) {
+      return {
+        ...state,
+        list : state.list.map( t => {
+          const status = payload.find(s => s.testId === t.id);
+          return status ? { ...t, status : status.status } : t;
+        }),
+        performanceTest : {
+          ...state.performanceTest,
+          status: payload.find(s => s.testId === state.performanceTest.id) ? payload.find(s => s.testId === state.performanceTest.id).status : 'STOPPED',
+        }
+      }
+    }
   }
 }

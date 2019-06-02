@@ -43,6 +43,12 @@ class PerformanceTest extends PureComponent {
           <Button
             type="primary"
             icon="caret-right"
+            onClick={() => {
+              dispatch({
+                type : 'performanceTests/runTest',
+                payload: performanceTest.id
+              });
+            }}
           >
             Run
           </Button>
