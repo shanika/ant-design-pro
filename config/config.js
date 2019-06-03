@@ -85,6 +85,11 @@ export default {
     'layout-header-height': '80px'
   },
   proxy: {
+    "/api/notifications": {
+      "target": "ws://localhost:8080/",
+      ws: true,
+      "pathRewrite": { "^/api/notifications" : "/api/notifications" }
+    },
     "/api": {
       "target": "http://localhost:8080/",
       "changeOrigin": true,

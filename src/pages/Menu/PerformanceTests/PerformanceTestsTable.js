@@ -5,6 +5,11 @@ import StatusBadge from '../../../components/StatusBadge';
 
 const columns = (dispatch) => [
   {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+  },
+  {
     title: 'Test Name',
     dataIndex: 'name',
     key: 'name',

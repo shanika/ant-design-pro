@@ -1,4 +1,6 @@
 import React, { Suspense } from 'react';
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 import { Layout } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
@@ -59,6 +61,7 @@ class BasicLayout extends React.Component {
       type: 'menu/getMenuData',
       payload: { routes, path, authority },
     });
+    this.connectWs();
   }
 
   getContext() {
@@ -98,6 +101,21 @@ class BasicLayout extends React.Component {
       return null;
     }
     return <SettingDrawer />;
+  };
+
+  connectWs = () => {
+
+    const { dispatch } = this.props;
+
+    const authorization = localStorage.getItem('kandula-token');
+    const sock = new SockJS(`/api/notifications?auth=${authorization}`);
+
+    const stompClient = Stomp.over(sock);
+    stompClient.connect({}, () => {
+      stompClient.subscribe('/user/queue/actions', ({ body }) => {
+        dispatch(JSON.parse(body));
+      });
+    });
   };
 
   render() {
