@@ -94,6 +94,10 @@ export async function runPerformanceTest(workspaceId, id) {
   });
 }
 
+export async function getExecutions(workspaceId, testId) {
+  return request(`/api/workspaces/${workspaceId}/tests/${testId}/executions`);
+}
+
 export async function getStatus(workspaceId) {
   return request(`/api/workspaces/${workspaceId}/tests/status`);
 }

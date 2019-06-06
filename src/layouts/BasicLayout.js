@@ -108,7 +108,7 @@ class BasicLayout extends React.Component {
     const { dispatch } = this.props;
 
     const authorization = localStorage.getItem('kandula-token');
-    const sock = new SockJS(`/api/notifications?auth=${authorization}`);
+    const sock = new SockJS(`${API_URL}api/notifications?auth=${authorization}`);
 
     const stompClient = Stomp.over(sock);
     stompClient.connect({}, () => {

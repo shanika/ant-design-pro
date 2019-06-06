@@ -1,0 +1,17 @@
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Test-Details" transform="translate(-367.000000, -229.000000)">
+            <g id="Container" transform="translate(338.000000, 115.000000)">
+                <g id="Row" transform="translate(10.000000, 95.000000)">
+                    <g id="Title" transform="translate(20.000000, 20.000000)">
+                        <g id="icon">
+                            <rect id="base-copy-3" fill="#FFFFFF" x="0" y="0" width="50" height="50" rx="4"></rect>
+                            <rect id="base-copy-4" stroke="#36CFC9" fill-opacity="0.1" fill="#36CFC9" x="-0.5" y="-0.5" width="51" height="51" rx="4"></rect>
+                            <path d="M21.25,25.5 L21.25,30.5 L18.75,30.5 L18.75,25.5 L21.25,25.5 Z M25,20.5 L25,30.5 L22.5,30.5 L22.5,20.5 L25,20.5 Z M35,31.75 L35,33 L15,33 L15,18 L16.25,18 L16.25,31.75 L35,31.75 Z M28.75,23 L28.75,30.5 L26.25,30.5 L26.25,23 L28.75,23 Z M32.5,19.25 L32.5,30.5 L30,30.5 L30,19.25 L32.5,19.25 Z" id="Bar-Chart---FontAwesome" fill="#36CFC9"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

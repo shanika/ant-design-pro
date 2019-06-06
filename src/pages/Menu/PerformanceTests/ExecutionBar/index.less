@@ -1,0 +1,54 @@
+.executionBar {
+  background-color: #efeff4;
+  display: flex;
+  align-items: center;
+  padding: 5px 0 5px 15px;
+}
+
+.barWrapper {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+.point {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: #fff;
+  height: 20px;
+  width: 20px;
+  background: #bcbbb9;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 50%;
+}
+
+.line {
+  display: block;
+  background: #fff;
+  height: 5px;
+  width: 100%;
+  padding: 0 -5px;
+}
+
+.complete {
+  .point {
+    background: @primary-color;
+  }
+
+  .line {
+    background: @primary-color;
+  }
+}
+
+.status {
+  color: rgb(117, 114, 114);
+  font-size: 12px;
+  margin-left: 15px;
+  text-transform: capitalize;
+  span {
+    color: rgb(69, 165, 133);
+    margin-left: 5px;
+  }
+}

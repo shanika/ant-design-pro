@@ -7,7 +7,7 @@ import slash from 'slash2';
 
 const { pwa, primaryColor } = defaultSettings;
 // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
-const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, TEST } = process.env;
+const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION, TEST, API_URL = 'http://localhost:8080/' } = process.env;
 
 const plugins = [
   [
@@ -65,6 +65,7 @@ export default {
   define: {
     ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION:
       ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION || '', // preview.pro.ant.design only do not use in your production ; preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
+    API_URL: API_URL
   },
   treeShaking: true,
   targets: {
@@ -85,20 +86,13 @@ export default {
     'layout-header-height': '80px'
   },
   proxy: {
-    "/api/notifications": {
-      "target": "ws://localhost:8080/",
-      ws: true,
-      "pathRewrite": { "^/api/notifications" : "/api/notifications" }
-    },
     "/api": {
-      "target": "http://localhost:8080/",
+      "target": API_URL,
       "changeOrigin": true,
-      "pathRewrite": { "^/api" : "/api" }
     },
     "/auth" : {
-      "target": "http://localhost:8080/",
+      "target": API_URL,
       "changeOrigin": true,
-      "pathRewrite": { "^/auth" : "/auth" }
     }
   },
   ignoreMomentLocale: true,

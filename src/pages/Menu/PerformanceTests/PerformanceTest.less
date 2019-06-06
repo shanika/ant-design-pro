@@ -1,0 +1,88 @@
+.executions {
+  :global {
+     .ant-list-item {
+       flex-direction: column;
+       margin: 18px 12px;
+       padding: 0;
+       background-color: rgb(251, 251, 253);
+       border-bottom: none;
+       border-radius: 5px;
+     }
+
+    h4 {
+      color: rgba(0, 0, 0, 0.65);
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .ant-list-item-meta {
+      flex : auto;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  padding : 18px;
+}
+
+.footer {
+  width: 100%;
+  background-color: #efeff4;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .specs {
+
+    .title {
+      margin-bottom: 6px;
+      color: gray;
+      font-size: 13.5px;
+
+      i {
+        margin-right: 8px;
+      }
+    }
+
+    .value {
+      display: block;
+      margin-left: 2px;
+      color: #000;
+      font-size: 14px;
+      text-transform: capitalize;
+    }
+
+    :global {
+      .ant-col {
+        min-width: 180px;
+      }
+    }
+
+  }
+}
+
+.rightContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .time {
+    display: block;
+    min-width: 50px;
+    margin : 16px ;
+    color: #36cfc9;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+}

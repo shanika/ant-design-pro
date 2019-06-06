@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import {
-  addPerformanceTest,
+  addPerformanceTest, getExecutions,
   getPerformanceTest,
   getPerformanceTests, getStatus,
   removePerformanceTest, runPerformanceTest,
@@ -12,6 +12,7 @@ export default {
   state: {
     list: [],
     performanceTest: {},
+    executions : [],
     showConfig : true
   },
   effects: {
@@ -61,10 +62,25 @@ export default {
         payload : performanceTest
       });
     },
-    *unsetOne(action, {put}) {
-      yield put({
-        type : 'unsetAccount'
-      });
+    *fetchExecutions({payload}, {call, put, select}) {
+      const {
+        user: {
+          currentUser: { currentWorkspaceId: workspaceId },
+        },
+        routing : {
+          location : {
+            pathname
+          }
+        }
+      } = yield select();
+
+      if ( pathname && pathname.startsWith(`/menu/performanceTests/${payload}`)) {
+        const executions = yield call(getExecutions, workspaceId, payload);
+        yield put({
+          type : 'setExecutions',
+          payload : executions
+        });
+      }
     },
     *runTest({ payload }, { call, select}) {
       const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
@@ -110,10 +126,22 @@ export default {
         performanceTest : payload
       }
     },
-    unsetAccount(state) {
+    unsetPerformanceTest(state) {
       return {
         ...state,
         performanceTest : {}
+      }
+    },
+    setExecutions(state, {payload}) {
+      return {
+        ...state,
+        executions : payload
+      }
+    },
+    unsetOne(state) {
+      return {
+        ...state,
+        executions : []
       }
     },
     setShowConfig(state, { payload }) {
@@ -132,7 +160,16 @@ export default {
         performanceTest : {
           ...state.performanceTest,
           status: payload.find(s => s.testId === state.performanceTest.id) ? payload.find(s => s.testId === state.performanceTest.id).status : 'STOPPED',
-        }
+        },
+        executions : state.executions.map(ex => {
+          if (payload.find( s => s.executionId === ex.id)) {
+            return {
+              ...ex,
+              status : payload.find( s => s.executionId === ex.id).status
+            }
+          }
+          return ex;
+        })
       }
     }
   }
