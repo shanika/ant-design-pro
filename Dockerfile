@@ -1,12 +1,11 @@
-FROM circleci/node:latest-browsers
+FROM nginx
 
 WORKDIR /usr/src/app/
-USER root
-COPY package.json ./
-RUN yarn
 
-COPY ./ ./
+COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN npm run test:all
+COPY ./dist  /usr/share/nginx/html/
 
-CMD ["npm", "run", "build"]
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
