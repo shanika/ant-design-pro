@@ -15,6 +15,7 @@ export default {
   'menu.menu.performanceTests' : 'Performance Tests',
   'menu.menu.performanceTests.performanceTest' : 'Performance Tests',
   'menu.menu.performanceTests.performanceTestsList' : 'Performance Tests',
+  'menu.menu.performanceTests.report' : 'Execution Report',
   'menu.form': 'Form',
   'menu.form.basicform': 'Basic Form',
   'menu.form.stepform': 'Step Form',

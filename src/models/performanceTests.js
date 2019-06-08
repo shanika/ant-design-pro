@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import {
-  addPerformanceTest, getExecutions,
+  addPerformanceTest, getExecution, getExecutions,
   getPerformanceTest,
   getPerformanceTests, getStatus,
   removePerformanceTest, runPerformanceTest,
@@ -13,6 +13,7 @@ export default {
     list: [],
     performanceTest: {},
     executions : [],
+    execution : {},
     showConfig : true
   },
   effects: {
@@ -82,6 +83,14 @@ export default {
         });
       }
     },
+    *fetchExecution({payload : { testId, id}}, {call, put, select}) {
+      const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
+      const execution = yield call(getExecution,workspaceId, testId, id);
+      yield put({
+        type : 'setExecution',
+        payload : execution
+      });
+    },
     *runTest({ payload }, { call, select}) {
       const { user : { currentUser : { currentWorkspaceId : workspaceId }}} = yield select();
       yield call(runPerformanceTest, workspaceId, payload);
@@ -136,6 +145,18 @@ export default {
       return {
         ...state,
         executions : payload
+      }
+    },
+    setExecution(state, {payload}) {
+      return {
+        ...state,
+        execution : payload,
+      }
+    },
+    clearExecution(state) {
+      return {
+        ...state,
+        execution : {}
       }
     },
     unsetOne(state) {

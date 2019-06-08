@@ -88,7 +88,7 @@ class PerformanceTest extends PureComponent {
 
     return (
       <PageHeaderWrapper
-        onBack={() => router.push("/menu/performanceTests")}
+        onBack={() => router.goBack()}
         hiddenBreadcrumb
         title={performanceTest && performanceTest.name}
         extra={this.extra()}
@@ -134,7 +134,7 @@ class PerformanceTest extends PureComponent {
                   </div>
                   <div className={styles.rightContent}>
                     <ElapsedTime className={styles.time} startTime={item.startTime && moment(item.startTime)} endTime={item.endTime && moment(item.endTime)} />
-                    <Button>Report</Button>
+                    <Button onClick={() => router.push(`/menu/performanceTests/${performanceTest.id}/report/${item.id}`)}>Report</Button>
                   </div>
                 </div>
               </div>

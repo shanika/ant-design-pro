@@ -77,6 +77,11 @@ export default [
                 path:'/menu/performanceTests/:id',
                 name:'performanceTest',
                 component: './Menu/PerformanceTests/PerformanceTest',
+              },
+              {
+                path:'/menu/performanceTests/:testId/Report/:id',
+                name:'report',
+                component: './Menu/PerformanceTests/Report',
               }
             ]
           },

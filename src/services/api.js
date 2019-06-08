@@ -98,9 +98,38 @@ export async function getExecutions(workspaceId, testId) {
   return request(`/api/workspaces/${workspaceId}/tests/${testId}/executions`);
 }
 
+export async function getExecution(workspaceId, testId, executionId) {
+  return request(`/api/workspaces/${workspaceId}/tests/${testId}/executions/${executionId}`);
+}
+
 export async function getStatus(workspaceId) {
   return request(`/api/workspaces/${workspaceId}/tests/status`);
 }
+
+/*
+  Metrics Data
+ */
+
+export async function getSampleMetrics(workspaceId, executionId, startTime, endTime) {
+  return request(`/api/workspaces/${workspaceId}/metrics/${executionId}/agg-samples?startTime=${startTime}&endTime=${endTime}`);
+}
+
+export async function getErrorList(workspaceId, executionId) {
+  return request(`/api/workspaces/${workspaceId}/metrics/${executionId}/error-list`);
+}
+
+export async function getNodeUsage(workspaceId, executionId, startTime, endTime) {
+  return request(`/api/workspaces/${workspaceId}/metrics/${executionId}/node-usage?startTime=${startTime}&endTime=${endTime}`);
+}
+
+export async function getLabels(workspaceId, executionId) {
+  return request(`/api/workspaces/${workspaceId}/metrics/${executionId}/sample-labels`);
+}
+
+export async function getAggResults(workspaceId, executionId, startTime, endTime) {
+  return request(`/api/workspaces/${workspaceId}/metrics/${executionId}/agg-result?startTime=${startTime}&endTime=${endTime}`);
+}
+
 
 /*
 Meta Data
